@@ -1,5 +1,6 @@
 const fs = require('fs');
 const {resolve} = require('path');
+const {rcompare} = require('semver');
 
 const isDirectory = source =>
   fs.lstatSync(source).isDirectory();
