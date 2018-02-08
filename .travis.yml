@@ -9,5 +9,5 @@ before_script:
 - yarn install
 script:
 - cd $TRAVIS_BUILD_DIR/build
-- if [ $TRAVIS_EVENT_TYPE = "cron" -o $TRAVIS_EVENT_TYPE = "api" ]; then ./run.sh; fi
-- if [ $TRAVIS_EVENT_TYPE = "cron" -o $TRAVIS_EVENT_TYPE = "api" ]; then ./push.sh; fi
+- ./run.sh
+- ./push.sh
