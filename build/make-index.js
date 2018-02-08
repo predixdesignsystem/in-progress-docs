@@ -7,10 +7,18 @@ const isDirectory = source =>
 const getDirectories = source =>
   fs.readdirSync(source).map(name => resolve(source, name)).filter(isDirectory);
 
+const sortTags = (a, b) => {
+  // Convert any 'v0.2' -> 'v0.2.0' so they are valid semver tags. :(
+  const badPreTag = /^v0\.[0-9]+$/;
+  const _a = badPreTag.test(a) ? `${a}.0` : a;
+  const _b = badPreTag.test(b) ? `${b}.0` : b;
+  return rcompare(_a, _b);
+};
+
 const getTags = repo => getDirectories(resolve(__dirname, `../${repo}`))
   .map(r => r.split('/').pop())
   .filter(r => r[0] === 'v')
-  .reverse();
+  .sort(sortTags);
 
 const repos = getDirectories(resolve(__dirname, '../'))
   .map(r => r.split('/').pop())
