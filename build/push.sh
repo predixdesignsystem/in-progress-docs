@@ -10,7 +10,6 @@ cd $TRAVIS_BUILD_DIR
 rm -rf .git/
 git init .
 git checkout --orphan gh-pages
-rm -f .gitignore
 
 # Prep git credentials
 GIT_USER_NAME="Travis CI"
