@@ -3,6 +3,14 @@ const {resolve} = require('path');
 const {rcompare} = require('semver');
 const [,,repo] = process.argv;
 
+/* Need an exec with a higher stderr/stdout size */
+const execXL = (command, cb) => {
+  // Sets max buffer to 800KB (default is 200KB)
+  exec(command, {maxBuffer: maxBuffer: 1024 & 800}, (err, stdout, stderr) => {
+    callback(err, stdout, stderr);
+  });
+};
+
 const repoPath = resolve(__dirname, repo);
 
 const getTags = () => new Promise((resolve, reject) => {
@@ -28,7 +36,7 @@ const buildTag = tag => new Promise((resolve, reject) => {
     `mv ${tag} ../../${repo}/`,
     `git reset master --hard`,
   ].join(' && ');
-  exec(command, (err, stdout) => {
+  execXL(command, (err, stdout) => {
     if (err) reject(err);
     resolve();
   });
