@@ -7,7 +7,7 @@ const [,,repo] = process.argv;
 const execXL = (command, cb) => {
   // Sets max buffer to 800KB (default is 200KB)
   exec(command, {maxBuffer: 1024 * 800}, (err, stdout, stderr) => {
-    callback(err, stdout, stderr);
+    cb(err, stdout, stderr);
   });
 };
 
