@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- node
+branches:
+  only:
+  - master
+before_script:
+- yarn global add polymer-cli bower semver
+- yarn install
+script:
+- cd $TRAVIS_BUILD_DIR/build
+- ./run.sh
+- ./push.sh
